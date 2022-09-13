@@ -1,0 +1,78 @@
+﻿<html>
+<head>
+    <title>Rocket Browser - GPS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="lib/RocketBrowser.js"></script>
+    <script src="lib/Card.js"></script>
+</head>
+<body id="gps-screen" class="d-flex flex-column h-100 w-100 bg-dark">
+
+    <div id="main" class="container">
+    </div>
+
+    <script>
+        var container = document.getElementById("main");
+        let cardList = null;
+        let gpsStart = false;
+        let counter = 0;
+
+
+        LocationEventData = function (location) {
+            counter++;
+            let data = parseObjectToHTML(location)
+            cardList.add('GPS', `${counter}.)<br />${data}`, 'primary');
+        }
+
+        KeyboardEventData = function (device, action, keyCode) {
+            if (action == 'down') {
+                if (keyCode == 'volumeUp')
+                    GetLocation();
+                if (keyCode == 'f1')
+                    ToggleGps();
+                if (keyCode == 'volumeDown')
+                {
+                    counter = 0;
+                    cardList.clear();
+                }
+            }
+        }
+
+        GetLocation = function () {
+            cardList.add('GPS', `Get Location`, 'info');
+
+            RocketBrowser.GPS.getLocation().then(response => {
+                LocationEventData(response);
+            }).catch(error => {
+                cardList.add('GPS', 'Error' , 'danger');
+            });
+        }
+
+        ToggleGps = function () {
+            if (!gpsStart) {
+                cardList.add('GPS', `Start Monitor`, 'info');
+                RocketBrowser.GPS.startMonitoring().then(response => {
+                    gpsStart = true;
+                }).catch(error => {
+                    cardList.clear();
+                    cardList.add('GPS', 'Monitor Error' , 'danger');
+                });
+            }
+            else {
+                cardList.add('GPS', `Stop Monitor`, 'info');
+                return RocketBrowser.GPS.stopMonitoring().then(response => {
+                    gpsStart = false;
+                }).catch(error => {
+                    cardList.add('GPS', 'Monitor Error' , 'danger');
+                });
+            }
+        }
+
+        fusionReady = function () {
+            cardList = new Card(container);
+        }
+    </script>
+</body>
+</html>

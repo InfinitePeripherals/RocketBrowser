@@ -1,0 +1,47 @@
+﻿<html>
+<head>
+    <title>Rocket Browser - Barcode</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="lib/RocketBrowser.js"></script>
+    <script src="lib/Card.js"></script>
+</head>
+<body id="barcode-screen" class="d-flex flex-column h-100 w-100 bg-dark">
+    
+    <div id="main" class="container">
+    </div>
+    
+    <script>
+        var container = document.getElementById("main");
+        let cardList = null;
+        let barcodeCount = 0;
+
+        KeyboardEventData = function(device, action, keyCode){
+            if(action == 'down'){
+                if (keyCode == 'f1')
+                    RocketBrowser.Barcode.startScan();
+                if (keyCode == 'volumeDown') {
+                    barcodeCount = 0;
+                    cardList.clear();
+                }
+            }
+            else if(action == 'up'){
+                if(keyCode == 'f1')
+                    RocketBrowser.Barcode.stopScan();
+            }
+        }
+
+        BarcodeData = function (barcode, type, typeText) {
+            barcodeCount++;
+            cardList.add('Barcode', `${barcodeCount}.) Barcode: ${barcode} Type: ${type} - ${typeText}` , 'primary');
+        }
+
+        fusionReady = function () {
+            cardList = new Card(container);
+            cardList.add('Barcode', `Ready` , 'info');
+        }
+    </script>
+</body>
+</html>

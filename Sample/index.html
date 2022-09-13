@@ -1,0 +1,144 @@
+﻿<html>
+<head>
+    <title>Rocket Browser</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="lib/RocketBrowser.js"></script>
+    <script src="lib/Carousel.js"></script>
+</head>
+<body id="home-screen" class="d-flex flex-column h-100 w-100 bg-dark">
+    <div id="main" class="container">
+    </div>
+    <footer>
+        <p class="bottom-text">RocketBrowser 1.0.0</p>
+    </footer>
+    
+    <script>
+        let container = document.getElementById("main");
+        let carousel = null;
+
+        function SetupCarousel() {
+            const carousel_container = document.createElement("div");
+            carousel_container.className = "launcher";
+            const cardWidth = 100;
+            const items = [
+                {
+                    "icon": {
+                        "src": "./images/barcode.svg",
+                        "alt": "barcode"
+                    },
+                    "title": "Barcode",
+                    "action": {
+                        "url": "barcode.html"
+                    }
+                },
+                {
+                    "icon": {
+                        "src": "./images/image.svg",
+                        "alt": "Image"
+                    },
+                    "title": "Image",
+                    "subtitle": "",
+                    "action": {
+                        "url": "image.html"
+                    }
+                },
+                {
+                    "icon": {
+                        "src": "./images/buttons.svg",
+                        "alt": "button settings"
+                    },
+                    "title": "Buttons",
+                    "subtitle": "",
+                    "action": {
+                        "url": "buttons.html"
+                    }
+                },
+                {
+                    "icon": {
+                        "src": "./images/gps.svg",
+                        "alt": "GPS"
+                    },
+                    "title": "GPS",
+                    "subtitle": "",
+                    "action": {
+                        "url": "gps.html"
+                    }
+                },
+                {
+                    "icon": {
+                        "src": "./images/device.svg",
+                        "alt": "device settings"
+                    },
+                    "title": "Device",
+                    "subtitle": "",
+                    "action": {
+                        "url": "device.html"
+                    }
+                },
+                {
+                    "icon": {
+                        "src": "./images/appconfig.png",
+                        "alt": "device settings"
+                    },
+                    "title": "App Config",
+                    "subtitle": "",
+                    "action": {
+                        "url": "appconfig.html"
+                    }
+                },
+                {
+                    "icon": {
+                        "src": "./images/magic.svg",
+                        "alt": "magic scan"
+                    },
+                    "title": "Magic Scan",
+                    "subtitle": "",
+                    "action": {
+                        "url": "magicscan.html"
+                    }
+                },
+                {
+                    "icon": {
+                        "src": "./images/cloud.svg",
+                        "alt": "qr2web"
+                    },
+                    "title": "QR2Web",
+                    "action": {
+                        "url": "qrweb.html"
+                    }
+                }
+            ];
+
+            carousel = new Carousel(carousel_container, items, cardWidth);
+            if (container !== undefined) {
+                container.appendChild(carousel_container);
+            }
+        }
+
+        KeyboardEventData = function (device, action, keyCode) {
+            if (action == 'down') {
+                if(keyCode == 'volumeUp')
+                    carousel.prev();
+
+                if(keyCode == 'volumeDown')
+                    carousel.next();
+
+                if(keyCode == 'f1')
+                {
+                    carousel.getCurrentCard();
+                    RocketBrowser.Browser.redirect(carousel.activeCard["href"]);
+                }
+            }
+        }
+
+        fusionReady = function(){
+            SetupCarousel();
+        }
+
+        SetupCarousel();
+    </script>
+</body>
+</html>

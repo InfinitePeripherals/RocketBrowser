@@ -1,0 +1,34 @@
+﻿<html>
+<head>
+    <title>Rocket Browser - Device</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="lib/RocketBrowser.js"></script>
+    <script src="lib/Card.js"></script>
+</head>
+<body id="device-screen" class="d-flex flex-column h-100 w-100 bg-dark">
+
+    <div id="main" class="container">
+    </div>
+
+    <script>
+        var container = document.getElementById("main");
+        let cardList = null;
+
+        fusionReady = function () {
+            cardList = new Card(container);
+            cardList.add('Device Info', 'Loading', 'info');
+            RocketBrowser.Device.details().then(response => {
+                cardList.clear();
+                let data = parseObjectToHTML(response)
+                cardList.add('Device Info', data, 'primary');
+            }).catch(error => {
+                cardList.clear();
+                cardList.add('Device Info', 'Error' , 'danger');
+            });
+        }
+    </script>
+</body>
+</html>

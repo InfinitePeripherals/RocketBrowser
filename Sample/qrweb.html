@@ -1,0 +1,48 @@
+﻿<html>
+<head>
+    <title>Rocket Browser - QR2Web</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="lib/RocketBrowser.js"></script>
+    <script src="lib/Card.js"></script>
+</head>
+<body id="qrweb-screen" class="d-flex flex-column h-100 w-100 bg-dark">
+    
+    <div id="main" class="container">
+    </div>
+    
+    <script>
+        var container = document.getElementById("main");
+        let cardList = null;
+
+        KeyboardEventData = function(device, action, keyCode){
+            if(action == 'down'){
+                if (keyCode == 'f1')
+                    RocketBrowser.Barcode.startScan();
+                if (keyCode == 'volumeDown') 
+                    cardList.clear();
+            }
+            else if(action == 'up'){
+                if(keyCode == 'f1')
+                    RocketBrowser.Barcode.stopScan();
+            }
+        }
+
+        BarcodeData = function (barcode, type, typeText) {
+            if (barcode.includes('http') || barcode.includes('www')) {
+                cardList.add('QRWeb', `Redirecting to ${barcode}`, 'primary');
+                window.location.href = barcode;
+            }   
+            else
+                cardList.add('QRWeb', `Invalid URL`, 'warning');
+        }
+
+        fusionReady = function () {
+            cardList = new Card(container);
+            cardList.add('QRWeb', `Scan QR URL` , 'info');
+        }
+    </script>
+</body>
+</html>

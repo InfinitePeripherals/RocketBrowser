@@ -1,0 +1,79 @@
+<html>
+<head>
+    <title>Rocket Browser - Magic Scan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="lib/RocketBrowser.js"></script>
+    <script src="lib/Card.js"></script>
+    <script src="lib/MagicScan.js"></script>
+</head>
+<body id="barcode-screen" class="d-flex flex-column h-100 w-100 bg-dark">
+    
+    <div id="main" class="container"></div>
+    <audio hidden id="goodbeep"> <source src="audio/sound_ok.wav" type="audio/x-wav"></audio>
+    <audio hidden id="badbeep"> <source src="audio/sound_err.wav" type="audio/x-wav"></audio>
+
+    <script>
+        var container = document.getElementById("main");       
+        let cardList = null;
+        let barcodeCount = 0;
+        let down=false;
+
+        KeyboardEventData = function(device, action, keyCode){
+            if(action == 'down'){
+                if (keyCode == 'f1' && down==false )
+                {
+                    down=true;
+                    RocketBrowser.Barcode.startScan();
+                }
+                if (keyCode == 'volumeDown') {
+                    barcodeCount = 0;
+                    cardList.clear();
+                }
+            }
+            else if(action == 'up'){
+                if(keyCode == 'f1')
+                    RocketBrowser.Barcode.stopScan();
+                    down=false;
+            }
+        }
+
+        BarcodeData = function (barcode, type, typeText) {
+
+            // MagicScan
+            var magic = MagicScan(type, barcode);
+
+            // Reject Test
+            if ( !magic.accept ) {
+               if (down) RocketBrowser.Barcode.startScan();
+               return;
+            }
+
+            // Accept this scan
+            barcode = barcode;//magic.adjBarcode;
+            down=true; // wait for keyup to set this to false releasing the scan
+            RocketBrowser.Barcode.stopScan();
+            barcodeCount++;
+            cardList.add('Barcode', `${barcodeCount}.) Barcode: ${barcode} Type: ${type} - ${typeText}` , 'primary');
+            PlayGoodSound();
+        }
+
+        PlayGoodSound = function()
+        {            
+            document.getElementById('goodbeep').play();
+        }
+
+        PlayBadSound = function()
+        {
+            document.getElementById('badbeep').play();
+        }
+
+        fusionReady = function () {
+            cardList = new Card(container);
+            cardList.add('Barcode', 'Ready' , 'info');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+﻿<html>
+<head>
+    <title>Rocket Browser - Buttons</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="lib/RocketBrowser.js"></script>
+</head>
+    <body id="haloring-scanner-demo" class="d-flex flex-column h-100 w-100 bg-dark">
+    <div class="haloring-scanner-container position-relative mx-auto">
+      <img src="./images/haloring-scanner/haloring-scanner.png" id="halo-ring-scanner" alt="haloring scanner device" />
+      <img src="./images/haloring-scanner/left-button.svg" id="left-button" class="position-absolute img-fluid" alt="haloring scanner left button highlighted" />
+      <img src="./images/haloring-scanner/middle-button.svg" id="middle-button" class="position-absolute img-fluid" alt="haloring scanner select button highlighted" />
+      <img src="./images/haloring-scanner/right-button.svg" id="right-button" class="position-absolute img-fluid" alt="haloring scanner right button highlighted" />
+    </div>
+    <script>
+
+        let leftButton =  document.getElementById("left-button");
+        let middleButton =  document.getElementById("middle-button");
+        let rightButton =  document.getElementById("right-button");
+
+        KeyboardEventData = function (device, action, keyCode) {
+            if(action == 'down'){
+                if(keyCode == 'volumeUp')
+                    leftButton.classList.add("active");
+                if(keyCode == 'f1')
+                    middleButton.classList.add("active");
+                if(keyCode == 'volumeDown')
+                    rightButton.classList.add("active");
+            }
+            else if(action == 'up'){
+                if(keyCode == 'volumeUp')
+                    leftButton.classList.remove("active");
+                if(keyCode == 'f1')
+                    middleButton.classList.remove("active");
+                if(keyCode == 'volumeDown')
+                    rightButton.classList.remove("active");
+            }
+        }
+    </script>
+</body>
+</html>

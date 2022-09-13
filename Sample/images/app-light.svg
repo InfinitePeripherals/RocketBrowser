@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>Dark</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Dark" fill="#FFFFFF">
+            <path d="M0,4 C-2.705415e-16,1.790861 1.790861,4.05812251e-16 4,0 L12,0 C14.209139,1.3527075e-16 16,1.790861 16,4 L16,12 C16,14.209139 14.209139,16 12,16 L4,16 C1.790861,16 2.705415e-16,14.209139 0,12 L0,4 Z M4,1 C2.34314575,1 1,2.34314575 1,4 L1,12 C1,13.6568542 2.34314575,15 4,15 L12,15 C13.6568542,15 15,13.6568542 15,12 L15,4 C15,2.34314575 13.6568542,1 12,1 L4,1 Z" id="Shape" fill-rule="nonzero"></path>
+            <text id="App" font-family="Helvetica" font-size="6" font-weight="normal" letter-spacing="0.200000003">
+                <tspan x="2.46210937" y="10">Ap</tspan>
+                <tspan x="10.2009766" y="10">p</tspan>
+            </text>
+        </g>
+    </g>
+</svg>

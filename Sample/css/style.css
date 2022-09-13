@@ -1,0 +1,136 @@
+html, body {
+  overflow: hidden;
+}
+
+header {
+  height: 10px;
+}
+
+div.container {
+  overflow-y: auto;
+  height: 100%; /*calc(100% - 50px);*/
+}
+
+#home-screen footer {
+  min-height: 25px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+/* Carousel Launcher */
+.launcher {
+  width: 100%;
+  height: 100%;
+}
+.launcher__container {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.launcher__card {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  -webkit-transition: left 0.2s ease;
+  transition: left 0.2s ease;
+}
+.launcher .card {
+  background-color: transparent;
+  border:none;
+  color: #FFFFFF;
+  text-align: center;
+  -webkit-transition: -webkit-transform 200ms ease;
+  transition: -webkit-transform 200ms ease;
+  transition: transform 200ms ease;
+  transition: transform 200ms ease, -webkit-transform 200ms ease;
+  pointer-events: all;
+}
+.launcher .card__icon, .launcher .card__title {
+  pointer-events: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.launcher .card__icon {
+  margin-bottom: 16px;
+}
+.launcher .card__icon img {
+  width: 100%;
+  height: 100px;
+}
+.launcher .card__title {
+  font-size: 16px;
+  letter-spacing: 0.5px;
+}
+.launcher .card__title span {
+  font-size: 12px;
+}
+.launcher .card.next {
+  -webkit-transform: translateX(-40%);
+          transform: translateX(-40%);
+}
+
+/* Carousel Launcher */
+
+
+/* Halo Button CSS */
+
+#halo-ring-scanner {
+  max-width: 60%;
+  height: auto;
+  margin: 0% 20%;
+}
+
+.haloring-scanner-container #left-button {
+  left: 93px;
+  width: 46px;
+  bottom: 75px;
+}
+
+.haloring-scanner-container #middle-button {
+  left: 137px;
+  width: 47px;
+  bottom: 73px;
+}
+
+.haloring-scanner-container #right-button {
+  left: 185px;
+  width: 45px;
+  bottom: 74px;
+}
+
+.haloring-scanner-container .img-fluid{
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.haloring-scanner-container .img-fluid.active{
+  opacity: 0.9;
+}
+
+/* Button CSS */
+
+/* Image CSS */
+.card-text img.camera{width:100%;}
+
+/* MQTT CSS */
+#footer-serial {
+  display: block;
+  color: white;
+  position: absolute;
+  bottom: 0px;
+  height: 35px;
+  width: 100%;
+  text-align: center;
+  font-size: 1.25rem;
+  background: rgba(var(--bs-dark-rgb),var(--bs-bg-opacity))!important
+}

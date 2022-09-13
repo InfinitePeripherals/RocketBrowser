@@ -1,0 +1,42 @@
+﻿<html>
+<head>
+    <title>Rocket Browser - Image</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="lib/RocketBrowser.js"></script>
+    <script src="lib/Card.js"></script>   
+</head>
+<body id="camera-screen" class="d-flex flex-column h-100 w-100 bg-dark">
+    
+    <div id="main" class="container">
+    </div>
+    
+    <script>
+        var container = document.getElementById("main");
+        let cardList = null;
+        let isTakingPicture = false;
+
+        KeyboardEventData = function(device, action, keyCode){
+            if(action == 'down'){
+                if (keyCode == 'f1' && !isTakingPicture)
+                {
+                    isTakingPicture = true;
+                    RocketBrowser.Image.fromCamera();
+                }
+            }
+        }
+
+        Base64ImageData = function(base64Image){
+            isTakingPicture = false;
+            cardList.add('Camera', `<img src="data:image/png;base64,${base64Image}" class="camera" alt="camera image"/>` , 'primary');
+        }
+
+        fusionReady = function () {
+            cardList = new Card(container);
+            cardList.add('Camera', `Ready` , 'primary');
+        }
+    </script>
+</body>
+</html>
